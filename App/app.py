@@ -116,25 +116,28 @@ def main():
     Args: None
     Return: None 
     """
-    lista = [] #instanciar una lista vacia
+    lista1 = [] #instanciar una lista vacia
+    lista2 = [] #instancia otra lista vacia
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos
-                print("Datos cargados, "+str(len(lista))+" elementos cargados")
+                loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista1) #llamar funcion cargar datos
+                print("Datos cargados, "+str(len(lista1))+" elementos cargados")
+                loadCSVFile("Data/SmallMovieCastingRaw.csv",lista2) #carga datos lista 2
+                print("Datos cargados, "+str(len(lista2))+" elementos cargados")
             elif int(inputs[0])==2: #opcion 2
-                if len(lista)==0: #obtener la longitud de la lista
+                if len(lista1)==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
-                else: print("La lista tiene "+str(len(lista))+" elementos")
+                else: print("La lista tiene "+str(len(lista1))+" elementos")
             elif int(inputs[0])==3: #opcion 3
                 criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsFilteredByColumn(criteria, "genres", lista) #filtrar una columna por criterio  
+                counter=countElementsFilteredByColumn(criteria, "genres", lista1) #filtrar una columna por criterio  
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #option 4
                 criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsByCriteria(criteria,0,lista)
+                counter=countElementsByCriteria(criteria,0,lista1)
                 print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
