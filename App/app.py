@@ -125,12 +125,15 @@ def main():
             if int(inputs[0])==1: #opcion 1
                 loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista1) #llamar funcion cargar datos
                 print("Datos cargados, "+str(len(lista1))+" elementos cargados")
-                loadCSVFile("Data/SmallMovieCastingRaw.csv",lista2) #carga datos lista 2
+                loadCSVFile("Data/AllMoviesCastingRaw.csv",lista2) #carga datos lista 2
                 print("Datos cargados, "+str(len(lista2))+" elementos cargados")
             elif int(inputs[0])==2: #opcion 2
                 if len(lista1)==0: #obtener la longitud de la lista
-                    print("La lista esta vacía")    
-                else: print("La lista tiene "+str(len(lista1))+" elementos")
+                    print("La lista 1 esta vacía")    
+                else: print("La lista 1 tiene "+str(len(lista1))+" elementos")
+                if len(lista2)==0: #longitud lista 2 (deberia ser igual a la 1 para funionar)
+                    print("La lista 2 esta vacía")
+                else: print("La lista 2 tiene "+str(len(lista2))+" elementos")
             elif int(inputs[0])==3: #opcion 3
                 criteria =input('Ingrese el criterio de búsqueda\n')
                 counter=countElementsFilteredByColumn(criteria, "genres", lista1) #filtrar una columna por criterio  
