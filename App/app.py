@@ -144,7 +144,7 @@ def main():
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
-            if int(inputs[0])==1: #opcion 1
+            if int(inputs[0])==1: #option 1
                 loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista1) #llamar funcion cargar datos
                 print("Datos cargados, "+str(len(lista1))+" elementos cargados")
                 loadCSVFile("Data/MoviesCastingRaw-small.csv",lista2) #carga datos lista 2

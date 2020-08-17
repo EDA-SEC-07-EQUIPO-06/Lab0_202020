@@ -6,3 +6,7 @@
 *	DataStructures: archivos Python con las estructuras de datos básicas (listas enlazadas y arreglos).
 *	Sorting: archivos Python que implementan los algoritmos de ordenamiento.
 *	Test: pruebas unitarias en Python para validar el código desarrollado.
+
+Grupo 6: 
+Camilo A. García        ca.garciar1         201728914
+Gloria Guevara          gg.guevara          201912754
