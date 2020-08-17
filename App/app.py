@@ -157,7 +157,7 @@ def main():
                     print("La lista 2 esta vacía")
                 else: print("La lista 2 tiene "+str(len(lista2))+" elementos")
             elif int(inputs[0])==3: #opcion 3
-                criteria =input('Ingrese el criterio de búsqueda\n')
+                criteria =input('Ingrese el genero de búsqueda\n')
                 counter=countElementsFilteredByColumn(criteria, "genres", lista1) #filtrar una columna por criterio  
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #option 4
