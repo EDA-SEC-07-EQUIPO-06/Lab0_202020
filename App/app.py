@@ -141,3 +141,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def encontrar_buenas_peliculas(peliculas:dict):
+    
+    buenasPeli =[]
+    if i in peliculas :
+
+       if ( (pelicula["vote_average"] >= 6)) and peliculas[i]== pelicula["director_name"]:
+
+           buenasPeli.append(peliculas[i])
+
+return buenasPeli
