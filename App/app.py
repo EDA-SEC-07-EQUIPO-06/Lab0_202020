@@ -101,12 +101,34 @@ def countElementsFilteredByColumn(criteria, column, lst):
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
     return counter
 
-def countElementsByCriteria(criteria, column, lst):
+def countElementsByCriteria(director, lst, otra):
     """
     Retorna la cantidad de elementos que cumplen con un criterio para una columna dada
     """
-    return 0
+    if len(lst)!= len(otra):
+        print("listas incongruentes")
+        return 0
+    else:
+        t1_start = process_time() #tiempo inicial
+        counter= 0
+        puntaje_total=0
+        referencia=""
+        respuesta= (0,0)
+        for element in otra: #recorre elementos en lista 2
+            if director.lower() in element["director_name"].lower(): #filtra por director
+                referencia= (element["id"]) #recupera id de pelicula
+                for element2 in lst: #recorre elementos en lista 1
+                    if referencia in element2["id"]: #filtra por id de pelicula
+                        puntaje= float(element2["vote_average"])
+                        if puntaje >= 6.0:
+                            counter+= 1
+                            puntaje_total+= puntaje
+        respuesta= (counter, puntaje_total/counter)
+        t1_stop= process_time()
+        print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
+    return respuesta
 
+            
 
 def main():
     """
@@ -116,26 +138,34 @@ def main():
     Args: None
     Return: None 
     """
-    lista = [] #instanciar una lista vacia
+    lista1 = [] #instanciar una lista vacia
+    lista2 = [] #instancia otra lista vacia
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/test.csv", lista) #llamar funcion cargar datos
-                print("Datos cargados, "+str(len(lista))+" elementos cargados")
+                loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista1) #llamar funcion cargar datos
+                print("Datos cargados, "+str(len(lista1))+" elementos cargados")
+                loadCSVFile("Data/MoviesCastingRaw-small.csv",lista2) #carga datos lista 2
+                print("Datos cargados, "+str(len(lista2))+" elementos cargados")
             elif int(inputs[0])==2: #opcion 2
-                if len(lista)==0: #obtener la longitud de la lista
-                    print("La lista esta vacía")    
-                else: print("La lista tiene "+str(len(lista))+" elementos")
+                if len(lista1)==0: #obtener la longitud de la lista
+                    print("La lista 1 esta vacía")    
+                else: print("La lista 1 tiene "+str(len(lista1))+" elementos")
+                if len(lista2)==0: #longitud lista 2 (deberia ser igual a la 1 para funionar)
+                    print("La lista 2 esta vacía")
+                else: print("La lista 2 tiene "+str(len(lista2))+" elementos")
             elif int(inputs[0])==3: #opcion 3
-                criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsFilteredByColumn(criteria, "nombre", lista) #filtrar una columna por criterio  
+                criteria =input('Ingrese el genero de búsqueda\n')
+                counter=countElementsFilteredByColumn(criteria, "genres", lista1) #filtrar una columna por criterio  
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
-            elif int(inputs[0])==4: #opcion 4
-                criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsByCriteria(criteria,0,lista)
-                print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
+            elif int(inputs[0])==4: #option 4
+                director =input('Ingrese el director de búsqueda\n')
+                respuesta=countElementsByCriteria(director, lista1, lista2)
+                counter=respuesta[0]
+                promedio=respuesta[1]
+                print("Coinciden ",counter," elementos del director: ", director ," con puntaje igual o mayor a 6 puntos. El promedio de puntaje es ", promedio)
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
 
